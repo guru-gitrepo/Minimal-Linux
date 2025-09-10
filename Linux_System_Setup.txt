@@ -604,3 +604,5 @@ password mxyl kudf hten ahrn
 account default : gmail
 
 # chmod 600 ~/.muttrc ~/.config/msmtp/config
+
+#############################################################################
