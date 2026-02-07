@@ -1,24 +1,21 @@
 # ANTIX LINUX SETUP GUIDE
 
-- First Download Antix-core iso and burn it on a pendrive using dd command. Do not
+* First Download Antix-core iso and burn it on a pendrive using dd command. Do not
 use isohybrid.
 
-- If you want to install it alongside windows, it is better to install it on a
+* If you want to install it alongside windows, it is better to install it on a
 separate EFI partition. So that it will not be overwritten during the windows
 update. Here is my system partition -
 
-
-| Number | Start | End | Size | File | Name | Flags |
-|---|
-
-
-1 1049kB 106MB 105MB fat32 EFI system partition boot,esp
-2 106MB 123MB 16.8MB Microsoft reserved partition msftres
-3 123MB 246GB 246GB ntfs Basic data partition msftdata
-4 500GB 500GB 556MB ntfs hidden, diag
-5 246GB 247GB 1074MB fat32 EFI System Partition boot,esp
-6 247GB 248GB 1074MB ext4 Swap partition swap
-7 248GB 500GB 252GB ext4 Linux root
+| Number | Start |  End | Size | File | Name | Flags |
+|---|---|---|---|---|---|---|
+|1| 1049kB| 106MB| 105MB |fat32| EFI| system partition| boot,esp|
+|2| 106MB| 123MB |16.8MB| fat32|Microsoft reserved partition| msftres|
+|3 |123MB |246GB |246GB |ntfs |Basic data partition| msftdata
+|4 |500GB |500GB |556MB |ntfs ||hidden, diag|
+|5 |246GB |247GB |1074MB| fat32| EFI |System Partition| boot,esp|
+|6 |247GB |248GB |1074MB |ext4 |Swap partition| swap|
+|7 |248GB |500GB |252GB |ext4| Linux| root|
 
 5,6,7 are for linux.
 
