@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Correction for Java applications
+wmname LG3D &
+export AWT_TOOLKIT=MToolkit
+
+# brightness control
+brightnessctl set 5%
+
+# DWM status loop
+while true
+do
+    # Read battery information
+    BAT=$(cat /sys/class/power_supply/BAT0/capacity)
+    PERCENT=$((BAT * 444 / 100))
+    STATUS=$(cat /sys/class/power_supply/BAT0/status)
+
+     if [ "$STATUS" = "Discharging" ] && [ "$PERCENT" -le 20 ] && [ "$PERCENT" -ge 1 ]; then
+        herbe "LOW BATTERY"
+     fi
+
+    if [ "$STATUS" = "Charging" ] && [ "$PERCENT" -ge 80 ]; then
+        herbe "Battery is Full"
+    fi
+
+    if [ "$STATUS" = "Not charging" ] ; then
+        herbe "Battery is Full"
+    fi
+
+    # Clock
+    CLK=$(date +'%I:%M')
+
+    # Volume
+    VOL=$(amixer get Master | grep '%' | head -n1 | cut -d '[' -f2 | cut -d '%' -f1)
+
+    # Set statusbar
+    xsetroot -name "| $PERCENT%($STATUS) | VOL:$VOL% | $CLK "
+
+    sleep 5
+done &
+
+#redshift -O 3000 && sleep 1
+xsetroot -solid '#000000'
+
+# xset dpms 300 400 500; # To trun off display after 5 minutes inactive
+
+exec dbus-launch --exit-with-session dwm
